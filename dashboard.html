@@ -117,21 +117,24 @@
   function gonder() {
     const secim = document.querySelector('input[name="katilim"]:checked').value;
     const aciklama = document.getElementById("aciklama").value;
+    const adsoyad = localStorage.getItem("adsoyad");
 
-    emailjs.send(
-      "eg6wi",               // SERVICE ID
-      "template_a1r9jlr",    // TEMPLATE ID
-      {
-        katilim: secim,
-        aciklama: aciklama
-      }
-    ).then(function() {
-      document.getElementById("successMsg").style.display = "block";
-    }, function(error) {
-      alert("Hata oluştu: " + error.text);
-    });
-  }
+  emailjs.send(
+    "eg6wi",
+    "template_a1r9jlr",
+    {
+      katilim: secim,
+      aciklama: aciklama,
+      adsoyad: adsoyad
+    }
+  ).then(function() {
+    document.getElementById("successMsg").style.display = "block";
+  }, function(error) {
+    alert("Hata oluştu: " + error.text);
+  });
+}
 </script>
 
 </body>
 </html>
+
