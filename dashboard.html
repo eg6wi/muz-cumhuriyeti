@@ -1,103 +1,54 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <link rel="stylesheet" href="still.css">
   <meta charset="UTF-8">
-  <title>Muz Cumhuriyeti | Katılım</title>
-
-  <!-- EmailJS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Muz Cumhuriyeti Panel</title>
+  <link rel="stylesheet" href="still.css">
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .box {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      width: 400px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    textarea {
-      width: 100%;
-      height: 80px;
-      margin-top: 10px;
-    }
-    button {
-      margin-top: 15px;
-      width: 100%;
-      padding: 10px;
-      background: #16a34a;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .success {
-      margin-top: 15px;
-      color: green;
-      display: none;
-      text-align: center;
-    }
-  </style>
 </head>
-<body>
+<body class="dashboard-body">
 
-  <div class="box">
-    <h2 id="welcome"></h2>
+  <div class="panel">
+    <h2>Yeni Katılım Bildirimi</h2>
 
-    <p>Katılım Durumu:</p>
-    <label>
-      <input type="radio" name="katilim" value="Geleceğim" checked>
-      Geleceğim
-    </label><br>
-    <label>
-      <input type="radio" name="katilim" value="Gelemeyeceğim">
-      Gelemeyeceğim
-    </label>
+    <form id="form">
+      <input type="text" name="name" placeholder="Ad Soyad" required>
 
-    <p>Açıklama:</p>
-    <textarea id="aciklama" placeholder="Varsa açıklama..."></textarea>
+      <label>
+        <input type="radio" name="katilim" value="Geleceğim" required>
+        Geleceğim
+      </label>
 
-    <button onclick="gonder()">Gönder</button>
+      <label>
+        <input type="radio" name="katilim" value="Gelemeyeceğim">
+        Gelemeyeceğim
+      </label>
 
-    <div class="success" id="successMsg">
-      ✅ Katılım bildirimin alındı
-    </div>
+      <textarea name="aciklama" placeholder="Açıklama"></textarea>
+
+      <button type="submit">Gönder</button>
+    </form>
+
+    <p id="success" class="success-msg"></p>
   </div>
 
   <script>
-    // EmailJS init
-    emailjs.init("py2CelCbc7_9Obo-"); // PUBLIC KEY
+    emailjs.init("PUBLIC_KEYİNİ_BURAYA_YAZ");
 
-    const adsoyad = localStorage.getItem("adsoyad");
-    document.getElementById("welcome").innerText = "Hoş geldin, " + adsoyad;
+    document.getElementById("form").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-    function gonder() {
-      const katilim = document.querySelector('input[name="katilim"]:checked').value;
-      const aciklama = document.getElementById("aciklama").value;
-
-      emailjs.send(
-        "eg6wi",              // SERVICE ID
-        "template_a1r9jlr",    // TEMPLATE ID
-        {
-          adsoyad: adsoyad,
-          katilim: katilim,
-          aciklama: aciklama
-        }
-      ).then(function() {
-        document.getElementById("successMsg").style.display = "block";
-      }, function(error) {
-        alert("Hata oluştu: " + error.text);
+      emailjs.send("eg6wi", "template_a1r9jlr", {
+        name: this.name.value,
+        katilim: this.katilim.value,
+        aciklama: this.aciklama.value
+      }).then(() => {
+        document.getElementById("success").innerText =
+          "Başarıyla Gönderildi";
+        this.reset();
       });
-    }
+    });
   </script>
-
 </body>
 </html>
-
