@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="still.css">
+</head>
+<body class="arkaplan">
+
+<div class="container cam">
+    <h2>Katılım Durumu</h2>
+
+    <label class="radio">
+        <input type="radio" name="katilim"> Geleceğim
+    </label>
+
+    <label class="radio">
+        <input type="radio" name="katilim"> Gelemeyeceğim
+    </label>
+
+    <textarea rows="5" placeholder="Açıklama yazınız..."></textarea>
+
+    <button onclick="gonder()">Gönder</button>
+
+    <div id="basariMesaji" class="basarili" style="display:none;">
+        Başvurunuz başarıyla gönderilmiştir.
+    </div>
+</div>
+
+<script>
+function gonder() {
+    document.getElementById("basariMesaji").style.display = "block";
+}
+</script>
+
+</body>
+</html>
