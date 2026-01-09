@@ -1,102 +1,89 @@
-/* ARKA PLAN */
-.arkaplan {
-    min-height: 100vh;
-    background: url("bayrak.jpg") no-repeat center center fixed;
-    background-size: cover;
-    position: relative;
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-.arkaplan::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    backdrop-filter: blur(8px);
-    background: rgba(255,255,255,0.4);
-    z-index: 0;
-}
-
-/* CAM EFEKT */
-.cam {
-    backdrop-filter: blur(10px);
-    background: rgba(255,255,255,0.85);
-    border-radius: 12px;
-}
-
-/* GENEL */
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
 }
 
-.container {
-    position: relative;
-    z-index: 1;
-    width: 360px;
-    margin: 100px auto;
-    padding: 30px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    text-align: center;
+/* ====== BLUR BACKGROUND ====== */
+.bg {
+  position: fixed;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url("bayrak.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
 }
 
-h1 {
-    font-size: 20px;
-    color: #b30000;
+/* ====== LOGIN ====== */
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h2 {
-    font-size: 16px;
-    margin-bottom: 20px;
+.login-container {
+  background: rgba(255,255,255,0.9);
+  padding: 30px;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.login-container h1 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  color: #555;
 }
 
 input, textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #c40000, #8b0000);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+  width: 100%;
+  padding: 12px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-button:hover {
-    opacity: 0.9;
+/* ====== DASHBOARD ====== */
+.dashboard-body {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 
-/* RADIO */
-.radio {
-    display: block;
-    text-align: left;
-    margin-bottom: 10px;
+.panel {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 12px;
 }
 
-/* BAŞARI */
-.basarili {
-    background-color: #e6f4ea;
-    color: #1e7e34;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #b7dfc5;
-    margin-top: 15px;
-    font-size: 14px;
+label {
+  display: block;
+  margin: 10px 0;
 }
 
-/* 📱 MOBİL */
-@media (max-width: 600px) {
-    .container {
-        width: 100%;
-        margin: 40px auto;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 18px;
-    }
+.success-msg {
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
 }
