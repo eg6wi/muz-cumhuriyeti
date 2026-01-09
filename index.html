@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Muz Cumhuriyeti Giriş Ekranı</title>
   <link rel="stylesheet" href="still.css">
 </head>
-<body class="login-body">
+<body>
 
   <!-- BLUR BACKGROUND -->
-  <div class="bg"></div>
+  <div class="background"></div>
 
-  <div class="login-container">
+  <div class="login-box">
     <h1>Muz Cumhuriyeti</h1>
-    <p class="subtitle">Katılım Bildirim Sistemi</p>
+    <p class="subtitle">Giriş Ekranı</p>
 
-    <form onsubmit="login(event)">
-      <input 
-        type="text"
-        id="adsoyad"
-        placeholder="Ad Soyad" 
-        required
-      />
+    <input 
+      type="text" 
+      id="adsoyad" 
+      placeholder="Ad Soyad"
+      required
+    >
 
-      <input 
-        type="password" 
-        placeholder="Şifre" 
-        required
-      />
-
-      <button type="submit">Giriş Yap</button>
-    </form>
+    <button onclick="girisYap()">Giriş Yap</button>
   </div>
 
   <script>
     function girisYap() {
-      const adsoyad = document.getElementById("adsoyad").value;
+      const adsoyad = document.getElementById("adsoyad").value.trim();
+
+      if (adsoyad === "") {
+        alert("Lütfen ad soyad giriniz");
+        return;
+      }
+
       localStorage.setItem("adsoyad", adsoyad);
       window.location.href = "dashboard.html";
-  }
+    }
   </script>
+
 </body>
 </html>
-
