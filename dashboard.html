@@ -1,54 +1,137 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Muz Cumhuriyeti Panel</title>
   <link rel="stylesheet" href="still.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muz Cumhuriyeti - Dashboard</title>
+
+  <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-</head>
-<body class="dashboard-body">
-
-  <div class="panel">
-    <h2>Yeni Katılım Bildirimi</h2>
-
-    <form id="form">
-      <input type="text" name="name" placeholder="Ad Soyad" required>
-
-      <label>
-        <input type="radio" name="katilim" value="Geleceğim" required>
-        Geleceğim
-      </label>
-
-      <label>
-        <input type="radio" name="katilim" value="Gelemeyeceğim">
-        Gelemeyeceğim
-      </label>
-
-      <textarea name="aciklama" placeholder="Açıklama"></textarea>
-
-      <button type="submit">Gönder</button>
-    </form>
-
-    <p id="success" class="success-msg"></p>
-  </div>
-
   <script>
-    emailjs.init("PUBLIC_KEYİNİ_BURAYA_YAZ");
-
-    document.getElementById("form").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      emailjs.send("eg6wi", "template_a1r9jlr", {
-        name: this.name.value,
-        katilim: this.katilim.value,
-        aciklama: this.aciklama.value
-      }).then(() => {
-        document.getElementById("success").innerText =
-          "Başarıyla Gönderildi";
-        this.reset();
-      });
-    });
+    (function(){
+      emailjs.init("py2CelCebc7_9Obo-"); 
+      // EmailJS > Account > Public Key
+    })();
   </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("bayrak.jpg") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .overlay {
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.5);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      width: 100%;
+      max-width: 400px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      resize: none;
+      margin-top: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      background: #c40000;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a30000;
+    }
+
+    .success {
+      display: none;
+      margin-top: 15px;
+      padding: 10px;
+      background: #d4edda;
+      color: #155724;
+      text-align: center;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="overlay">
+  <div class="card">
+    <h2>Katılım Bildirimi</h2>
+
+    <label>
+      <input type="radio" name="katilim" value="Geleceğim" checked>
+      Geleceğim
+    </label>
+
+    <label>
+      <input type="radio" name="katilim" value="Gelemeyeceğim">
+      Gelemeyeceğim
+    </label>
+
+    <textarea id="aciklama" placeholder="Açıklama (isteğe bağlı)"></textarea>
+
+    <button onclick="gonder()">Gönder</button>
+
+    <div class="success" id="successMsg">
+      ✅ Başarıyla Gönderildi
+    </div>
+  </div>
+</div>
+
+<script>
+  function gonder() {
+    const secim = document.querySelector('input[name="katilim"]:checked').value;
+    const aciklama = document.getElementById("aciklama").value;
+
+    emailjs.send(
+      "eg6wi",               // SERVICE ID
+      "template_a1r9jlr",    // TEMPLATE ID
+      {
+        katilim: secim,
+        aciklama: aciklama
+      }
+    ).then(function() {
+      document.getElementById("successMsg").style.display = "block";
+    }, function(error) {
+      alert("Hata oluştu: " + error.text);
+    });
+  }
+</script>
+
 </body>
 </html>
